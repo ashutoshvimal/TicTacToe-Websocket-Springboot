@@ -1,5 +1,5 @@
-This is a multiplayer Tic-Tac_Toe game.
-I have used websocket to make the game real time
-I have used springboot on backend html, css and js in frontend
-Currently application is not persistant as I have not used any database
-I would love if anyone make adds database(sql db).
+This is a multiplayer Tic-Tac-Toe game.<br/>
+I have used WebSocket to make the game real time.<br/>
+I have used Spring Boot on backend html, css and js in frontend.<br/>
+Currently, the application is not persistent as I have not used any database.</br>
+I would love it if someone adds database(relational db).
