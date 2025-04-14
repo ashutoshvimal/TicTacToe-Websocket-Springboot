@@ -6,7 +6,7 @@ table#board td {
 	font-size: 10vmin;
 }
 
-table#board td:hover { 
+table#board td:hover {
 	background-color: lightgray;
 }
 

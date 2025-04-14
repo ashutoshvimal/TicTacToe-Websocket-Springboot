@@ -12,9 +12,6 @@ public class GameController {
     @Autowired
     private GameManager gameManager;
 
-//    public GameController(GameManager gameManager) {
-//        this.gameManager = gameManager;
-//    }
     @MessageMapping("/move/{id}")
     @SendTo("/app/gamestate/{id}")
     public GameStateModel handleMove(@DestinationVariable String id, PlayerMoveMessage move){
@@ -24,7 +21,6 @@ public class GameController {
         return game;
     }
     @MessageMapping("/join/{id}")
-//    @SendTo("/topic/gamestate/{id}")
     public GameStateModel join(SimpMessageHeaderAccessor headerAccessor, @DestinationVariable String id, PlayerJoinMessage message) {
         System.out.println("Inside GameManager join");
         System.out.println(id);

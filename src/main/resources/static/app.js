@@ -79,7 +79,7 @@ function refresh() {
 }
 
 function create() {
-    var name = $("#gamename").val() || undefined;
+        var name = $("#gamename").val() || undefined;
 
     $('#createGameModal').modal('hide');
 

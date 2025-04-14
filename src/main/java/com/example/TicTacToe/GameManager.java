@@ -1,9 +1,7 @@
 package com.example.TicTacToe;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +31,8 @@ public class GameManager {
         String id = uuid.toString();
         game.setId(id);
 
-//        System.out.println(game...);
 
         gameStates.add(game);
-
-//        for(int i =0;i< gameStates.size();i++){
-//            System.out.println(gameStates.get(i));
-//        }
 
         gameMap.put(game.getId(), game);
         System.out.println(gameMap.size());
@@ -52,9 +45,7 @@ public class GameManager {
 
     public GameStateModel findGameById(String id){
         System.out.println("Inside findGameById");
-//        for (Map.Entry<String, GameStateModel> entry : gameMap.entrySet()) {
-//            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
-//        }
+
         for (Map.Entry<String, GameStateModel> entry : gameMap.entrySet()) {
             System.out.println("inside map print");
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
