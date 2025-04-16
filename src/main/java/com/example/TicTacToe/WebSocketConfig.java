@@ -17,7 +17,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/tic-tac-toe").setAllowedOrigins("http://localhost:*").withSockJS();
+        registry.addEndpoint("/tic-tac-toe")
+//                .setAllowedOrigins("*")
+//                .setAllowedOrigins("https://ashutoshvimal.com")
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
     }
 
 //    @MessageMapping("/connect")

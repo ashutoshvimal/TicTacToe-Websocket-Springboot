@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin
 public class ServerController {
 
     @Autowired
@@ -41,63 +39,11 @@ public class ServerController {
         System.out.println("Inside Server controller create game");
 
        return gameManager.crateGame(player, name);
-
-       //can be moved to different method
-//       UUID uuid = UUID.randomUUID();
-//       String id = uuid.toString();
-//       game.setId(id);
-//
-//       return game;
     }
-/*
-    @RequestMapping(method = RequestMethod.PATCH, value = "/app/game", params = {"id", "player"})
-    public ResponseEntity<GameStateModel> joinGame(@RequestParam(value = "id") String id,
-                                   @RequestParam(value = "player") String player){
-        GameStateModel game = gameManager.findGameById(id);
 
-        if (game == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        if(!game.isStarted() && !game.isDisconnected()){
-            game.join(player);
-            updateGameState(id, game);
-
-            return ResponseEntity.ok(game);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
-    */
-
-    //CHATGPT suggested code
-
-
-//    @RequestMapping(method = RequestMethod.PATCH, value = "/app/game", params = {"id", "player"})
-//public ResponseEntity<GameStateModel> joinGame(@RequestParam(value = "id") String id,
-//                                               @RequestParam(value = "player") String player) {
-//        System.out.println("Inside JOIN game");
-//    try {
-//        GameStateModel game = gameManager.findGameById(id);
-//        if (game == null) {
-//            System.out.println("game is null");
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//
-//        }
-//
-//        if (!game.isStarted() && !game.isDisconnected()) {
-//            game.join(player);
-//            updateGameState(id, game);
-//            return ResponseEntity.ok(game);
-//        }
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-//    } catch (Exception e) {
-//        e.printStackTrace();  // Log the exception for debugging
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//    }
-//}
 
     // Join
-    @RequestMapping(method = RequestMethod.PATCH, value = "/app/game", params = {"id", "player"})
+    @RequestMapping(method = RequestMethod.POST, value = "/app/game/join", params = {"id", "player"})
     public GameStateModel joinGame(@RequestParam(value = "id") String id,
                                    @RequestParam(value = "player") String player) {
 
@@ -115,15 +61,12 @@ public class ServerController {
         return null;
     }
 
-    //copied
     // Disconnect
-    @RequestMapping(method = RequestMethod.PATCH, value = "/app/game", params = {"id", "player", "disconnect"})
+    @RequestMapping(method = RequestMethod.POST, value = "/app/game/disconnect", params = {"id", "player", "disconnect"})
     public GameStateModel disconnectGame(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "player") String player,
             @RequestParam(value = "disconnect") boolean disconnect) {
-
-
 
 
             GameStateModel game = gameManager.findGameById(id);
@@ -134,16 +77,12 @@ public class ServerController {
 
                 return game;
             }
-
-
-
         return null;
     }
 
 
-    //copied
     // Rematch
-    @RequestMapping(method = RequestMethod.PATCH, value = "/app/game", params = {"id", "player", "rematch"})
+    @RequestMapping(method = RequestMethod.POST, value = "/app/game/rematch", params = {"id", "player", "rematch"})
     public GameStateModel rematchGame(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "player") String player,
